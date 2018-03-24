@@ -1,0 +1,137 @@
+﻿<Window x:Class="Contratos.AltaContrato" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Title="Contrato" Height="575" Width="450"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="Proveedor">
+                <DockPanel Margin="5">
+                    <Label DockPanel.Dock="Top">CUIT/CUIL:</Label>
+                    <TextBox DockPanel.Dock="Top" Name="cuitCuil" PreviewTextInput="NumberValidationTextBox" />
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="1" Grid.Column="1" Name="VerProveedores" Content="Ver todos" Click="VerProveedores_Click"/>
+                        <Button Grid.Row="1" Grid.Column="2" Name="ChequearProveedor" Content="Chequear" Click="ChequearProveedor_Click"/>
+                        <Button Grid.Row="1" Grid.Column="3" Name="NuevoProveedor" Content="Nuevo" Click="NuevoProveedor_Click"/>
+                    </Grid>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Grid.Column="2" Header="Grano">
+                <DockPanel Margin="5">
+                    <Label DockPanel.Dock="Top" Content="Tipo:"/>
+                    <ComboBox Name="granoTipo" DockPanel.Dock="Top"/>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="1" Grid.Column="2" Name="NuevoGrano" Content="Nuevo" Click="NuevoGrano_Click"/>
+                    </Grid>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+        <GroupBox Grid.Row="1" Header="Detalles">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <DataGrid Name="grillaDetalles"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
+                          Grid.Column="0"
+                          IsReadOnly="True"/>
+                <StackPanel Grid.Column="1">
+                    <Button Name="NuevoDetalle"
+                            Content="Nuevo"
+                            Click="NuevoDetalle_Click"/>
+                    <Button Name="EliminarDetalles"
+                            Content="Eliminar"
+                            Click="EliminarDetalles_Click"
+                            Margin="6 6 0 0"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="Contrato">
+            <DockPanel Margin="5">
+                <Label DockPanel.Dock="Top" Content="Numero:"/>
+                <TextBox DockPanel.Dock="Top" Name="numero" PreviewTextInput="NumberValidationTextBox" />
+                <Label DockPanel.Dock="Top" Content="Cantidad:"/>
+                <Grid DockPanel.Dock="Top" Name="cantidad">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0"
+                             Name="valor"
+                             PreviewTextInput="NumberValidationTextBox"/>
+                    <RadioButton IsChecked="True"
+                                 Name="Camiones"
+                                 Grid.Column="1">Camiones</RadioButton>
+                    <RadioButton Name="Toneladas"
+                                 Grid.Column="2">Toneladas</RadioButton>
+                </Grid>
+                <Label DockPanel.Dock="Top" Content="Precio (USD):" />
+                <TextBox DockPanel.Dock="Top" Name="precio" PreviewTextInput="NumberValidationTextBox" />
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="6" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label Content="Fecha Labra:"/>
+                        <DatePicker Name="fechaLabra" SelectedDateChanged="DateFechaLabra_SelectedDateChanged"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <Label Content="Fecha Limite:"/>
+                        <DatePicker Name="fechaLimite" IsEnabled="False" SelectedDateChanged="DateFechaLimite_SelectedDateChanged"/>
+                    </StackPanel>
+                </Grid>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="1" Grid.Column="1" Name="CancelarContrato" Content="Cancelar" Click="CancelarContrato_Click"/>
+                    <Button Grid.Row="1" Grid.Column="2" Name="GuardarSalirContrato" Content="Guardar y salir" Click="GuardarSalirContrato_Click"/>
+                </Grid>
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</Window>

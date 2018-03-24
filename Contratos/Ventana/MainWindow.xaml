@@ -1,0 +1,79 @@
+﻿<Window x:Class="Contratos.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Molino" Height="450" Width="750">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu x:Name="menuPrincipal" Grid.Row="0">
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Nuevo">
+                    <MenuItem Header="_Contrato..." Click="MenuContrato_Click"/>
+                    <Separator/>
+                    <MenuItem Header="_Condición..." Click="MenuCondicion_Click"/>
+                    <MenuItem Header="_Grano..." Click="MenuGrano_Click"/>
+                    <MenuItem Header="_Proveedor..." Click="MenuProveedor_Click"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Salir" Click="MenuSalir_Click" />
+            </MenuItem>
+            <MenuItem Header="Ver">
+                <MenuItem Header="Proveedores" Click="MenuVerProveedores_Click"/>
+            </MenuItem>
+            <MenuItem Header="Ayuda">
+                <MenuItem Header="Acerca de Molino..."/>
+            </MenuItem>
+        </Menu>
+        <Grid Margin="10" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textboxBuscar"
+                     PreviewTextInput="NumberValidationTextBox"
+                     TextChanged="TextBoxBuscar_TextChanged"
+                     Grid.Column="0"/>
+            </Grid>
+            <DataGrid x:Name="grillaContratos"
+                      AutoGenerateColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      IsReadOnly="True"
+                      Grid.Row="1">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Número" Binding="{Binding Numero}"/>
+                    <DataGridTextColumn Header="CUIT/CUIL" Binding="{Binding CuitCuil}"/>
+                    <DataGridTextColumn Header="Razón social" Binding="{Binding RazonSocial}"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                    <DataGridTextColumn Header="Unidad" Binding="{Binding Tipo}"/>
+                    <DataGridTextColumn Header="Precio (USD)" Binding="{Binding Precio}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Fecha de labra" Binding="{Binding FechaLabra}"/>
+                    <DataGridTextColumn Header="Fecha limite" Binding="{Binding FechaLimite}"/>
+                    <DataGridTextColumn Header="Estado actual" Binding="{Binding Estado}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

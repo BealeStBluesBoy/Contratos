@@ -1,0 +1,110 @@
+﻿<Window x:Class="Contratos.VerEditarContrato" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Title="Contrato" Height="425" Width="675"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Proveedor">
+                <DockPanel Margin="5">
+                    <Label DockPanel.Dock="Top" Name="cuitCuil" Content="_CUIT/CUIL: "/>
+                    <Label DockPanel.Dock="Top" Name="razonSocial" Content="_Razón Social: "/>
+                    <Label DockPanel.Dock="Top" Name="inicioActividades" Content="_Inicio de actividades: "/>
+                    <Label DockPanel.Dock="Top" Name="ingresosBrutos" Content="_Ingresos brutos: " Margin="0"/>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Detalles">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="grillaDetalles" CanUserResizeColumns="False" CanUserResizeRows="False" Grid.Column="0" IsReadOnly="True"/>
+                    <StackPanel Grid.Column="1">
+                        <Button Name="NuevoDetalle"
+                            Content="Nuevo"
+                            Click="NuevoDetalle_Click"
+                            IsEnabled="False"/>
+                        <Button Name="EliminarDetalles"
+                            Content="Eliminar"
+                            Click="EliminarDetalles_Click"
+                            IsEnabled="False"
+                            Margin="6 6 0 0"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="2" Header="Grano">
+                <DockPanel Margin="5">
+                    <ComboBox x:Name="granoTipo" DockPanel.Dock="Top" IsEnabled="False"/>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="1" Grid.Column="2" Name="NuevoGrano" Content="Nuevo" Click="NuevoGrano_Click" IsEnabled="False"/>
+                    </Grid>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Column="2">
+            <GroupBox Header="Contrato">
+                <DockPanel Margin="5">
+                    <Label DockPanel.Dock="Top" Name="numero" Content="Numero: " />
+                    <Label DockPanel.Dock="Top" Content="Cantidad:"/>
+                    <Grid DockPanel.Dock="Top" Name="cantidad">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Name="valor" PreviewTextInput="NumberValidationTextBox" IsEnabled="False" />
+                        <RadioButton IsChecked="True" Name="Camiones" Grid.Column="1" IsEnabled="False">Camiones</RadioButton>
+                        <RadioButton Name="Toneladas" Grid.Column="2" IsEnabled="False">Toneladas</RadioButton>
+                    </Grid>
+                    <Label DockPanel.Dock="Top" Content="Precio (USD):"/>
+                    <TextBox DockPanel.Dock="Top" Name="precio" PreviewTextInput="NumberValidationTextBox" IsEnabled="False" />
+                    <Label DockPanel.Dock="Top" Name="fechaLabra" Content="_Fecha Labra: "/>
+                    <Label DockPanel.Dock="Top" Content="Fecha Límite:"/>
+                    <DatePicker DockPanel.Dock="Top" Name="fechaLimite" IsEnabled="False" SelectedDateChanged="DateFechaLimite_SelectedDateChanged"/>
+                    <Label Name="Estado" DockPanel.Dock="Top" Content="Estado: "/>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="1" Grid.Column="1" Foreground="Red" Content="Cerrar" Name="CerrarContrato" Click="CerrarContrato_Click"/>
+                        <Button Grid.Row="1" Grid.Column="2" Foreground="Red" Content="Eliminar" Click="EliminarContrato_Click"/>
+                        <Button Grid.Row="1" Grid.Column="3" Name="CancelarContrato" Content="Salir" Click="CancelarContrato_Click"/>
+                        <Button Grid.Row="1" Grid.Column="4" Name="EditarContrato" Content="Editar" Click="Editar_Click"/>
+                    </Grid>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
