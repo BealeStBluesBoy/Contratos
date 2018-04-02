@@ -231,7 +231,7 @@ namespace Contratos
         private void EliminarContrato_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult resultado = MessageBox.Show("¿Está seguro de querer eliminar este contrato?", "Eliminar contrato", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (resultado== MessageBoxResult.Yes)
+            if (resultado == MessageBoxResult.Yes)
             {
                 ControladorContrato ctrl = new ControladorContrato();
                 if (ctrl.EliminarContrato(numeroaux))

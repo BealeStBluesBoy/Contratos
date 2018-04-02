@@ -14,7 +14,7 @@ namespace Contratos
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<GridItem> Items { get; set; }
+        public ObservableCollection<GridItem> Items;
 
         public MainWindow()
         {
@@ -22,7 +22,7 @@ namespace Contratos
             PopulateGrid();
         }
 
-        private class GridItem
+        public class GridItem
         {
             public int Numero { get; set; }
             public string CuitCuil { get; set; }
@@ -52,10 +52,10 @@ namespace Contratos
         {
             ControladorContrato ctrl = new ControladorContrato();
             List<Contrato> contratos = ctrl.VerTodos();
-            var lista = new List<GridItem>();
+            Items = new ObservableCollection<GridItem>();
             if (contratos.Count != 0)
             {
-                Items = new ObservableCollection<GridItem>();
+                var lista = new List<GridItem>();
                 contratos.ForEach(x => {
                     string estado;
                     if (x.Cerrado)
@@ -65,10 +65,10 @@ namespace Contratos
                     GridItem item = new GridItem(x.Numero, x.Proveedor.CuitCuil, x.Proveedor.RazonSocial, x.Cantidad, x.TipoContrato, x.Precio, x.FechaLabra.ToString("dd MMM yyyy"), x.FechaLimite.ToString("dd MMM yyyy"), estado);
                     lista.Add(item);
                 });
-                lista = lista.OrderBy(x => x.Numero).ToList();
+                lista = lista.OrderBy( x => x.Numero).ToList();
                 lista.ForEach( x => Items.Add(x));
-                grillaContratos.ItemsSource = Items;
             }
+            grillaContratos.ItemsSource = Items;
         }
 
         private void MenuContrato_Click(object sender, RoutedEventArgs e)
@@ -111,9 +111,12 @@ namespace Contratos
             if (Int32.TryParse(textboxBuscar.Text, out int result))
             {
                 int cantCarac = textboxBuscar.Text.Length;
-                var subList = Items.Where( x => x.Numero.ToString().Length >= cantCarac).ToList();
-                subList = subList.Where( x => x.Numero.ToString().Substring(0, cantCarac) == textboxBuscar.Text).ToList();
-                grillaContratos.ItemsSource = subList;
+                if (Items != null && Items.Count != 0)
+                {
+                    var subList = Items.Where( x => x.Numero.ToString().Length >= cantCarac).ToList();
+                    subList = subList.Where( x => x.Numero.ToString().Substring(0, cantCarac) == textboxBuscar.Text).ToList();
+                    grillaContratos.ItemsSource = subList;
+                }
             }
             else
             {
