@@ -81,7 +81,7 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Fecha de labra" Binding="{Binding FechaLabra}"/>
                     <DataGridTextColumn Header="Fecha limite" Binding="{Binding FechaLimite}"/>
-                    <DataGridTextColumn Header="Cerrado" Binding="{Binding Estado}"/>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

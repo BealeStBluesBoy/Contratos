@@ -26,16 +26,16 @@ namespace Contratos
 
         public class GridItem
         {
-            public int Numero { get; set; }
+            public string Numero { get; set; }
             public string RazonSocial { get; set; }
             public int Cantidad { get; set; }
             public string Tipo { get; set; }
             public float Precio { get; set; }
             public string FechaLabra { get; set; }
             public string FechaLimite { get; set; }
-            public bool Estado { get; set; }
+            public string Estado { get; set; }
 
-            public GridItem(int num, string razSoc, int cant, string tipo, float prec, string fLabra, string fLimite, bool cerrado)
+            public GridItem(string num, string razSoc, int cant, string tipo, float prec, string fLabra, string fLimite, string cerrado)
             {
                 Numero = num;
                 RazonSocial = razSoc;
@@ -50,14 +50,21 @@ namespace Contratos
 
         public void PopulateGrid()
         {
+            string Estado(bool estado)
+            {
+                if (estado)
+                    return "Cerrado";
+                else
+                    return "Abierto";
+            }
+
             ControladorContrato ctrl = new ControladorContrato();
             List<Contrato> contratos = ctrl.VerTodos();
             Items.Clear();
             if (contratos.Count != 0)
             {
                 contratos.ForEach(x => {
-                    GridItem item = new GridItem(x.Numero, x.Proveedor.RazonSocial, x.Cantidad, x.TipoContrato, x.Precio, x.FechaLabra.ToString("dd MMM yyyy"), x.FechaLimite.ToString("dd MMM yyyy"), x.Cerrado);
-                    Items.Add(item);
+                    Items.Add(new GridItem(x.Numero.ToString().PadLeft(8, '0'), x.Proveedor.RazonSocial, x.Cantidad, x.TipoContrato, x.Precio, x.FechaLabra.ToString("dd MMM yyyy"), x.FechaLimite.ToString("dd MMM yyyy"), Estado(x.Cerrado)));
                 });
             }
         }
@@ -103,11 +110,11 @@ namespace Contratos
             if (Int32.TryParse(textboxBuscar.Text, out int result))
             {
                 int cantCarac = textboxBuscar.Text.Length;
-                if (Items != null && Items.Count != 0)
+                if (Items.Count != 0)
                 {
                     grillaContratos.ItemsSource = Items
-                        .Where(x => x.Numero.ToString().Length >= cantCarac)
-                        .Where(x => x.Numero.ToString().Substring(0, cantCarac) == textboxBuscar.Text);
+                        .Where(x => x.Numero.Length >= cantCarac)
+                        .Where(x => x.Numero.Substring(0, cantCarac) == textboxBuscar.Text);
                 }
             }
             else
