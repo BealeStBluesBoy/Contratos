@@ -183,7 +183,7 @@ namespace Contratos
 
             if (OpenConnection())
             {
-                var Query = "SELECT numero FROM Contrato;";
+                var Query = "SELECT numero FROM Contrato ORDER BY numero;";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
