@@ -109,17 +109,12 @@ namespace Contratos
                 CloseConnection();
 
                 PersistenciaGrano dbGrano = new PersistenciaGrano();
-                var grano = dbGrano.Select(tipoGrano);
-
                 PersistenciaContratoDetalle dbDetalles = new PersistenciaContratoDetalle();
-                var detalles = dbDetalles.Select(numero);
-
                 PersistenciaProveedor dbProveedor = new PersistenciaProveedor();
-                var proveedor = dbProveedor.Select(cuitCuil);
 
-                ret.Grano = grano;
-                ret.Detalles = detalles;
-                ret.Proveedor = proveedor;
+                ret.Grano = dbGrano.Select(tipoGrano);
+                ret.Detalles = dbDetalles.Select(numero);
+                ret.Proveedor = dbProveedor.Select(cuitCuil);
             }
             return ret;
         }
@@ -129,8 +124,7 @@ namespace Contratos
             if (GetID(numero) != -1)
             {
                 PersistenciaContratoDetalle dbDetalles = new PersistenciaContratoDetalle();
-                dbDetalles.Delete(numero);
-                if (OpenConnection())
+                if (dbDetalles.Delete(numero) && OpenConnection())
                 {
                     var Query = string.Format("DELETE FROM Contrato WHERE numero='{0}';", numero);
                     MySqlCommand cmd = new MySqlCommand(Query, Connection);
