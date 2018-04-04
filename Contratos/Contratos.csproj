@@ -91,6 +91,9 @@
     <Compile Include="Controlador\ControladorCondicion.cs" />
     <Compile Include="Controlador\ControladorProveedor.cs" />
     <Compile Include="Dominio\Proveedor.cs" />
+    <Compile Include="Ventana\GenerarContrato.xaml.cs">
+      <DependentUpon>GenerarContrato.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ventana\VerEditarContrato.xaml.cs">
       <DependentUpon>VerEditarContrato.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ventana\AltaProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventana\GenerarContrato.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

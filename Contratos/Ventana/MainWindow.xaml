@@ -26,6 +26,9 @@
             <MenuItem Header="Ver">
                 <MenuItem Header="Proveedores" Click="MenuVerProveedores_Click"/>
             </MenuItem>
+            <MenuItem Header="Herramientas">
+                <MenuItem Header="Generador aleatorio" Click="MenuGen_Click"/>
+            </MenuItem>
             <MenuItem Header="Ayuda">
                 <MenuItem Header="Acerca de Molino..."/>
             </MenuItem>
@@ -44,6 +47,11 @@
                      PreviewTextInput="NumberValidationTextBox"
                      TextChanged="TextBoxBuscar_TextChanged"
                      Grid.Column="0"/>
+                <Button Name="Refrescar"
+                        Grid.Column="1"
+                        Click="Refrescar_Click"
+                        Content="Refrescar"
+                        VerticalAlignment="Top"/>
             </Grid>
             <DataGrid x:Name="grillaContratos"
                       AutoGenerateColumns="False"
@@ -57,10 +65,11 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Número" Binding="{Binding Numero}"/>
-                    <DataGridTextColumn Header="CUIT/CUIL" Binding="{Binding CuitCuil}"/>
-                    <DataGridTextColumn Header="Razón social" Binding="{Binding RazonSocial}"/>
-                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                    <DataGridTextColumn Header="Contrato nro." Binding="{Binding Numero}">
+                        
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Proveedor" Binding="{Binding RazonSocial}"/>
+                    <DataGridTextColumn Header="Cant. trigo" Binding="{Binding Cantidad}"/>
                     <DataGridTextColumn Header="Unidad" Binding="{Binding Tipo}"/>
                     <DataGridTextColumn Header="Precio (USD)" Binding="{Binding Precio}">
                         <DataGridTextColumn.ElementStyle>
