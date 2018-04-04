@@ -139,8 +139,8 @@ namespace Contratos
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DataGridCellInfo cell = grillaContratos.SelectedCells[0];
-            VerContrato(Int32.Parse(((TextBlock)cell.Column.GetCellContent(cell.Item)).Text));
+            GridItem item = (GridItem)grillaContratos.SelectedItem;
+            VerContrato(int.Parse(item.Numero));
         }
 
         private void MenuVerProveedores_Click(object sender, RoutedEventArgs e)
