@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace Contratos
 {
@@ -22,7 +21,6 @@ namespace Contratos
             InitializeComponent();
             DataContext = this;
             Items = new ObservableCollection<GridItem>();
-            grillaContratos.ItemsSource = Items;
             PopulateGrid();
         }
 
