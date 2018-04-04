@@ -56,8 +56,6 @@ namespace Contratos
                 return ret;
             }
 
-            
-
             if (Cantidad.Text != "" && Int32.TryParse(Cantidad.Text, out int result) && Int32.Parse(Cantidad.Text) > 0 && Int32.Parse(Cantidad.Text) <= 20)
             {
                 int cantGen = Int32.Parse(Cantidad.Text);
