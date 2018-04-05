@@ -107,7 +107,7 @@ namespace Contratos
 
         private void TextBoxBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Int32.TryParse(textboxBuscar.Text, out int result))
+            if (int.TryParse(textboxBuscar.Text, out int result))
             {
                 int cantCarac = textboxBuscar.Text.Length;
                 if (Items.Count != 0)

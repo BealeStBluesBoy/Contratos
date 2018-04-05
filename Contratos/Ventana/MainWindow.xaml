@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Molino" Height="450" Width="750">
+        ResizeMode="CanResizeWithGrip"
+        Title="Molino"
+        MinHeight="200"
+        MinWidth="400"
+        Height="425"
+        Width="725">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -66,9 +71,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Contrato nro." Binding="{Binding Numero}">
-                        
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Contrato nro." Binding="{Binding Numero}"/>
                     <DataGridTextColumn Header="Proveedor" Binding="{Binding RazonSocial}"/>
                     <DataGridTextColumn Header="Cant. trigo" Binding="{Binding Cantidad}"/>
                     <DataGridTextColumn Header="Unidad" Binding="{Binding Tipo}"/>

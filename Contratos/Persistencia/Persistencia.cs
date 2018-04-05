@@ -12,7 +12,7 @@ namespace Contratos
         public Persistencia()
         {
             string ConnectionString;
-            ConnectionString = "server=javapower.duckdns.org; uid=external; pwd=123abc; database=molino; sslmode=none";
+            ConnectionString = "server = javapower.duckdns.org; uid = external; pwd = 123abc; database = molino; sslmode = none";
             Connection = new MySqlConnection(ConnectionString);
         }
 
