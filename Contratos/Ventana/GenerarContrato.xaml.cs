@@ -46,7 +46,7 @@ namespace Contratos
                 return ret;
             }
 
-            if (Cantidad.Text != "" && Int32.TryParse(Cantidad.Text, out int result) && Int32.Parse(Cantidad.Text) > 0 && Int32.Parse(Cantidad.Text) <= 20)
+            if (Cantidad.Text != "" && Int32.TryParse(Cantidad.Text, out int result) && Int32.Parse(Cantidad.Text) > 0)
             {
                 int cantGen = Int32.Parse(Cantidad.Text);
 
@@ -73,12 +73,8 @@ namespace Contratos
                         contNum = rnd.Next(1, 99999999);
                     } while (numOcupados.Contains(contNum));
 
-                    if (cantActual != 0)
-                    {
-                        var indiceCont = rnd.Next(1, cantActual);
-                    }
-                    var indiceProv = rnd.Next(1, provAct.Count);
-                    var indiceGrano = rnd.Next(1, granoAct.Count);
+                    var indiceProv = rnd.Next(0, provAct.Count);
+                    var indiceGrano = rnd.Next(0, granoAct.Count);
 
                     if (ctrlCont.IngresarContrato(
                         indProv[indiceProv].CuitCuil,

@@ -7,10 +7,10 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
-        Title="Generar Contratos" Height="125" Width="200">
+        Title="Generar Contratos" Height="150" Width="200">
     <Grid>
-        <Label Content="Cantidad" Margin="10,10,10,66" />
-        <TextBox Name="Cantidad" Margin="10,35,10,38"/>
-        <Button Content="OK" Click="Button_Click" Margin="109,63,10,10"/>
+        <Label Content="Cantidad" Margin="10,10,10,89" />
+        <TextBox Name="Cantidad" Margin="10,32,10,65"/>
+        <Button Content="OK" Click="Button_Click" Margin="109,88,10,10"/>
     </Grid>
 </Window>
