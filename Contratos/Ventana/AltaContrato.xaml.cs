@@ -15,33 +15,27 @@ namespace Contratos
     public partial class AltaContrato : Window
     {
         public bool Refrescar = false;
-        ObservableCollection<GridItem> items = new ObservableCollection<GridItem>();
+        public ObservableCollection<GridItem> Items { get; set; }
 
         public AltaContrato()
         {
             InitializeComponent();
+            DataContext = this;
+            Items = new ObservableCollection<GridItem>();
             PopulateComboBox();
         }
 
-        private class GridItem
+        public class GridItem
         {
-            public string Nombre { get; set; }
-            public string Unidad { get; set; }
+            public string Condicion { get; set; }
             public float Valor { get; set; }
+            public string Unidad { get; set; }
 
             public GridItem(string nom, string unid, float val)
             {
-                Nombre = nom;
+                Condicion = nom;
                 Unidad = unid;
                 Valor = val;
-            }
-        }
-
-        public void PopulateGrid()
-        {
-            if (items.Count != 0)
-            {
-                grillaDetalles.ItemsSource = items;
             }
         }
 
@@ -83,7 +77,8 @@ namespace Contratos
             AltaGrano altaGranoVentana = new AltaGrano()
             { Owner = this };
             altaGranoVentana.ShowDialog();
-            PopulateComboBox();
+            if (altaGranoVentana.Refrescar)
+                PopulateComboBox();
         }
 
         private void NuevoDetalle_Click(object sender, RoutedEventArgs e)
@@ -95,21 +90,20 @@ namespace Contratos
             {
                 var item = new GridItem(altaDetalleVentana.Nombre, altaDetalleVentana.Unidad, altaDetalleVentana.Valor);
                 bool existe = false;
-                items.ToList().ForEach(x =>
+                Items.ToList().ForEach(x =>
                 {
-                    if (x.Nombre == altaDetalleVentana.Nombre)
+                    if (x.Condicion == altaDetalleVentana.Nombre)
                         existe = true;
                 });
                 if (!existe)
                 {
-                    items.Add(item);
+                    Items.Add(item);
                 }
                 else
                 {
                     MessageBox.Show("La condición seleccionada ya existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            PopulateGrid();
         }
 
         private void CancelarContrato_Click(object sender, RoutedEventArgs e)
@@ -127,21 +121,24 @@ namespace Contratos
             precio.Text != "" &&
             fechaLabra.SelectedDate != null &&
             fechaLimite.SelectedDate != null &&
-            items.Count != 0)
+            Items.Count != 0)
             {
                 if (ctrlPro.VerProveedor(cuitCuil.Text) != null)
                 {
                     string tipoCantidad;
                     List<ContratoDetalle> detalles = new List<ContratoDetalle>();
-                    items.ToList().ForEach(x =>
+                    Items.ToList().ForEach(x =>
                     {
-                        var condicion = new Condicion(0, x.Nombre, x.Unidad);
+                        var condicion = new Condicion(0, x.Condicion, x.Unidad);
                         var det = new ContratoDetalle(0, x.Valor);
                         det.AgregarCondicion(condicion);
                         detalles.Add(det);
                     });
-                    if (Camiones.IsChecked == true) tipoCantidad = "Camiones";
-                    else tipoCantidad = "Toneladas";
+
+                    if (Camiones.IsChecked == true)
+                        tipoCantidad = "Camiones";
+                    else
+                        tipoCantidad = "Toneladas";
 
                     ControladorContrato ctrlCon = new ControladorContrato();
                     if (ctrlCon.IngresarContrato(
@@ -174,15 +171,16 @@ namespace Contratos
 
         private void EliminarDetalles_Click(object sender, RoutedEventArgs e)
         {
-            if (items.Count != 0 && grillaDetalles.SelectedItem != null)
+            if (Items.Count != 0 && grillaDetalles.SelectedItem != null)
             {
-                int cantElementos = items.Count;
-                items.ToList().ForEach(x =>
+                int cantElementos = Items.Count;
+                Items.ToList().ForEach(x =>
                 {
-                    while (cantElementos == items.Count)
+                    while (cantElementos == Items.Count)
                     {
-                        if (x.Nombre == ((TextBlock)grillaDetalles.SelectedCells[0].Column.GetCellContent(grillaDetalles.SelectedCells[0].Item)).Text)
-                            items.RemoveAt(grillaDetalles.Items.IndexOf(grillaDetalles.SelectedItem));
+                        GridItem item = (GridItem)grillaDetalles.SelectedItem;
+                        if (x.Condicion == item.Condicion)
+                            Items.RemoveAt(grillaDetalles.Items.IndexOf(grillaDetalles.SelectedItem));
                         break;
                     }
                 });

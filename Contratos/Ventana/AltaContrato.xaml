@@ -69,7 +69,8 @@
                           CanUserResizeColumns="False"
                           CanUserResizeRows="False"
                           Grid.Column="0"
-                          IsReadOnly="True"/>
+                          IsReadOnly="True"
+                          ItemsSource="{Binding Items}"/>
                 <StackPanel Grid.Column="1">
                     <Button Name="NuevoDetalle"
                             Content="Nuevo"

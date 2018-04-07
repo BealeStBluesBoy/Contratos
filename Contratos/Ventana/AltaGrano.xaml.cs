@@ -7,6 +7,8 @@ namespace Contratos
     /// </summary>
     public partial class AltaGrano : Window
     {
+        public bool Refrescar = false;
+
         public AltaGrano()
         {
             InitializeComponent();
@@ -16,7 +18,10 @@ namespace Contratos
         {
             ControladorGrano ctrl = new ControladorGrano();
             if (tipoGrano.Text != "" && ctrl.IngresarGrano(tipoGrano.Text))
+            {
+                Refrescar = true;
                 MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
             else
                 MessageBox.Show("Error en la operación. Compruebe los datos o contacte con el administrador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -32,6 +37,7 @@ namespace Contratos
             if (tipoGrano.Text != "" && ctrl.IngresarGrano(tipoGrano.Text))
             {
                 MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                Refrescar = true;
                 Close();
             }
             else

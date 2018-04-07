@@ -15,7 +15,7 @@ namespace Contratos
         private void GuardarCondicion_Click(object sender, RoutedEventArgs e)
         {
             ControladorCondicion ctrl = new ControladorCondicion();
-            if ((nombreCondicion.Text != "") && (unidadCondicion.Text != ""))
+            if (nombreCondicion.Text != "" && unidadCondicion.Text != "")
             {
                 if (ctrl.IngresarCondicion(nombreCondicion.Text, unidadCondicion.Text))
                     MessageBox.Show("Operación exitosa", "Éxito");
@@ -34,7 +34,7 @@ namespace Contratos
         private void GuardarSalirCondicion_Click(object sender, RoutedEventArgs e)
         {
             ControladorCondicion ctrl = new ControladorCondicion();
-            if ((nombreCondicion.Text != "") && (unidadCondicion.Text != ""))
+            if (nombreCondicion.Text != "" && unidadCondicion.Text != "")
             {
                 if (ctrl.IngresarCondicion(nombreCondicion.Text, unidadCondicion.Text))
                 {
