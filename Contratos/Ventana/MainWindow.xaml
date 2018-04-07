@@ -72,9 +72,9 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Contrato nro." Binding="{Binding Numero}"/>
-                    <DataGridTextColumn Header="Proveedor" Binding="{Binding RazonSocial}"/>
+                    <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor.RazonSocial}"/>
                     <DataGridTextColumn Header="Cant. trigo" Binding="{Binding Cantidad}"/>
-                    <DataGridTextColumn Header="Unidad" Binding="{Binding Tipo}"/>
+                    <DataGridTextColumn Header="Unidad" Binding="{Binding TipoContrato}"/>
                     <DataGridTextColumn Header="Precio (USD)" Binding="{Binding Precio}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -82,9 +82,23 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Fecha de labra" Binding="{Binding FechaLabra}"/>
-                    <DataGridTextColumn Header="Fecha limite" Binding="{Binding FechaLimite}"/>
-                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+                    <DataGridTextColumn Header="Fecha de labra" Binding="{Binding FechaLabra, StringFormat=\{0:dd MMM yyy\}}"/>
+                    <DataGridTextColumn Header="Fecha limite" Binding="{Binding FechaLimite, StringFormat=\{0:dd MMM yyy\}}"/>
+                    <DataGridTextColumn Header="Estado">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Cerrado}" Value="true">
+                                        <Setter Property="Text" Value="Cerrado" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Cerrado}" Value="false">
+                                        <Setter Property="Text" Value="Abierto" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

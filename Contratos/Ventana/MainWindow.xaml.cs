@@ -14,59 +14,23 @@ namespace Contratos
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<GridItem> Items { get; set; }
+        public ObservableCollection<Contrato> Items { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            Items = new ObservableCollection<GridItem>();
+            Items = new ObservableCollection<Contrato>();
             PopulateGrid();
-        }
-
-        public class GridItem
-        {
-            public string Numero { get; set; }
-            public string RazonSocial { get; set; }
-            public int Cantidad { get; set; }
-            public string Tipo { get; set; }
-            public float Precio { get; set; }
-            public string FechaLabra { get; set; }
-            public string FechaLimite { get; set; }
-            public string Estado { get; set; }
-
-            public GridItem(string num, string razSoc, int cant, string tipo, float prec, string fLabra, string fLimite, string cerrado)
-            {
-                Numero = num;
-                RazonSocial = razSoc;
-                Tipo = tipo;
-                Cantidad = cant;
-                Precio = prec;
-                FechaLabra = fLabra;
-                FechaLimite = fLimite;
-                Estado = cerrado;
-            }
         }
 
         public void PopulateGrid()
         {
-            string Estado(bool estado)
-            {
-                if (estado)
-                    return "Cerrado";
-                else
-                    return "Abierto";
-            }
-
             ControladorContrato ctrl = new ControladorContrato();
-            List<Contrato> contratos = ctrl.VerTodos();
             Items.Clear();
-            if (contratos.Count != 0)
-            {
-                contratos.ForEach(x => {
-                    Items.Add(new GridItem(x.Numero.ToString().PadLeft(8, '0'), x.Proveedor.RazonSocial, x.Cantidad, x.TipoContrato, x.Precio, x.FechaLabra.ToString("dd MMM yyyy"), x.FechaLimite.ToString("dd MMM yyyy"), Estado(x.Cerrado)));
-                });
-            }
+            ctrl.VerTodos().ForEach(x => {
+                Items.Add(x);
+            });
         }
 
         private void MenuContrato_Click(object sender, RoutedEventArgs e)
@@ -113,8 +77,8 @@ namespace Contratos
                 if (Items.Count != 0)
                 {
                     grillaContratos.ItemsSource = Items
-                        .Where(x => x.Numero.Length >= cantCarac)
-                        .Where(x => x.Numero.Substring(0, cantCarac) == textboxBuscar.Text);
+                        .Where(x => x.Numero.ToString().Length >= cantCarac)
+                        .Where(x => x.Numero.ToString().Substring(0, cantCarac) == textboxBuscar.Text);
                 }
             }
             else
@@ -139,8 +103,8 @@ namespace Contratos
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GridItem item = (GridItem)grillaContratos.SelectedItem;
-            VerContrato(int.Parse(item.Numero));
+            Contrato item = (Contrato)grillaContratos.SelectedItem;
+            VerContrato(item.Numero);
         }
 
         private void MenuVerProveedores_Click(object sender, RoutedEventArgs e)
