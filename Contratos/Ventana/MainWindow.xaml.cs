@@ -92,19 +92,13 @@ namespace Contratos
             Close();
         }
 
-        private void VerContrato(int numero)
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            VerEditarContrato verEditarContratoVentana = new VerEditarContrato(numero)
+            VerEditarContrato verEditarContratoVentana = new VerEditarContrato((Contrato)grillaContratos.SelectedItem)
             { Owner = this };
             verEditarContratoVentana.ShowDialog();
             if (verEditarContratoVentana.Refrescar)
                 PopulateGrid();
-        }
-
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Contrato item = (Contrato)grillaContratos.SelectedItem;
-            VerContrato(item.Numero);
         }
 
         private void MenuVerProveedores_Click(object sender, RoutedEventArgs e)

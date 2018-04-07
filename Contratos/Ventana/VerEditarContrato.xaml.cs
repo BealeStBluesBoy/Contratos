@@ -20,18 +20,16 @@ namespace Contratos
         private int numeroaux;
         private ObservableCollection<GridItem> items = new ObservableCollection<GridItem>();
 
-        public VerEditarContrato(int numeroContrato)
+        public VerEditarContrato(Contrato contrato)
         {
             InitializeComponent();
             PopulateComboBox();
             PopulateGrid();
-            CargarDatos(numeroContrato);
+            CargarDatos(contrato);
         }
 
-        private void CargarDatos(int num)
+        private void CargarDatos(Contrato contrato)
         {
-            ControladorContrato ctrl = new ControladorContrato();
-            Contrato contrato = ctrl.VerContrato(num);
             fechaLabra.Content += contrato.FechaLabra.ToString("dd MMM yyyy");
             cuitCuil.Content += contrato.Proveedor.CuitCuil.ToString();
             razonSocial.Content += contrato.Proveedor.RazonSocial;
@@ -57,7 +55,7 @@ namespace Contratos
             });
             PopulateGrid();
             fechaLabraAux = contrato.FechaLabra;
-            numeroaux = num;
+            numeroaux = contrato.Numero;
         }
 
         private class GridItem
