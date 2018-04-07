@@ -184,6 +184,7 @@ namespace Contratos
                 {
                     numeros.Add(reader.GetInt32("numero"));
                 }
+                reader.Close();
                 CloseConnection();
             }
             else

@@ -12,7 +12,7 @@ namespace Contratos
         public Persistencia()
         {
             string ConnectionString;
-            ConnectionString = "server = javapower.duckdns.org; uid = external; pwd = 123abc; database = molino; sslmode = none";
+            ConnectionString = "server = localhost; uid = external; pwd = 123abc; database = molino; sslmode = none";
             Connection = new MySqlConnection(ConnectionString);
         }
 
@@ -28,11 +28,11 @@ namespace Contratos
                 switch (ex.Number)
                 {
                     case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        MessageBox.Show("Cannot connect to server.  Contact administrator", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
 
                     case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
+                        MessageBox.Show("Invalid username/password, please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                         break;
                 }
                 return false;
