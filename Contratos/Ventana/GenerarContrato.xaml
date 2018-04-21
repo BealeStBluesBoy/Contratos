@@ -9,8 +9,21 @@
         ShowInTaskbar="False"
         Title="Generar Contratos" Height="150" Width="200">
     <Grid>
-        <Label Content="Cantidad" Margin="10,10,10,89" />
-        <TextBox Name="Cantidad" Margin="10,32,10,65"/>
-        <Button Content="OK" Click="Button_Click" Margin="109,88,10,10"/>
+        <DockPanel Margin="10">
+            <Label Content="Cantidad"
+                   DockPanel.Dock="Top"/>
+            <TextBox Name="Cantidad"
+                     DockPanel.Dock="Top"/>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Button Content="OK"
+                    Click="Button_Click"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"/>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
