@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Contratos
 {
@@ -170,7 +171,7 @@ namespace Contratos
             }
         }
 
-        public List<Contrato> SelectAll() /// Vamo a hacerlo sencillo
+        public async Task<List<Contrato>> SelectAll() /// Vamo a hacerlo sencillo
         {
             List<Contrato> ret = new List<Contrato>();
             List<int> numeros = new List<int>();
@@ -192,8 +193,11 @@ namespace Contratos
                 return ret;
             }
             
-            numeros.ForEach( x => {
-                ret.Add(Select(x));
+            await Task.Run(() => {
+                numeros.ForEach(x =>
+                {
+                    ret.Add(Select(x));
+                });
             });
 
             return ret;

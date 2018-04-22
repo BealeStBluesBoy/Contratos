@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Contratos
 {
@@ -33,10 +34,10 @@ namespace Contratos
             return dbContrato.Close(numero);
         }
 
-        public List<Contrato> VerTodos()
+        public async Task<List<Contrato>> VerTodos()
         {
             PersistenciaContrato dbContrato = new PersistenciaContrato();
-            return dbContrato.SelectAll();
+            return await dbContrato.SelectAll();
         }
 
         public bool EliminarContrato(int numero) /// Elimina solamente Contrato y sus ContratoDetalle

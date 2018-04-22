@@ -22,11 +22,11 @@ namespace Contratos
             PopulateGrid();
         }
 
-        public void PopulateGrid()
+        public async void PopulateGrid()
         {
             ControladorContrato ctrl = new ControladorContrato();
             Items.Clear();
-            ctrl.VerTodos().ForEach(x => {
+            (await ctrl.VerTodos()).ForEach(x => {
                 Items.Add(x);
             });
         }
