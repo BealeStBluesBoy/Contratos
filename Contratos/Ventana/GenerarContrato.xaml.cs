@@ -16,7 +16,7 @@ namespace Contratos
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
 
@@ -59,7 +59,7 @@ namespace Contratos
                 IList<Grano> indGrano = granoAct;
 
                 ControladorContrato ctrlCont = new ControladorContrato();
-                List<Contrato> contAct = await ctrlCont.VerTodos();
+                List<Contrato> contAct = ctrlCont.VerTodos();
                 List<int> numOcupados = new List<int>();
                 contAct.ForEach(x => { numOcupados.Add(x.Numero); });
                 IList<int> indCont = numOcupados;
