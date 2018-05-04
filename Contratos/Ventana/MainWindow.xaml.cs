@@ -30,9 +30,7 @@ namespace Contratos
             Items.Clear();
             List<Contrato> auxItems = new List<Contrato>();
             await Task.Run(() => {
-                ctrl.VerTodos().ForEach(x => {
-                    auxItems.Add(x);
-                });
+                auxItems = ctrl.VerTodos();
             });
             auxItems.ForEach(x => {
                 Items.Add(x);
