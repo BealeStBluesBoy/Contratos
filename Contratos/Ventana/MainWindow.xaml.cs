@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Contratos
 {
@@ -22,11 +24,17 @@ namespace Contratos
             PopulateGrid();
         }
 
-        public void PopulateGrid()
+        public async void PopulateGrid()
         {
             ControladorContrato ctrl = new ControladorContrato();
             Items.Clear();
-            ctrl.VerTodos().ForEach(x => {
+            List<Contrato> auxItems = new List<Contrato>();
+            await Task.Run(() => {
+                ctrl.VerTodos().ForEach(x => {
+                    auxItems.Add(x);
+                });
+            });
+            auxItems.ForEach(x => {
                 Items.Add(x);
             });
         }
