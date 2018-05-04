@@ -21,10 +21,10 @@ namespace Contratos
             InitializeComponent();
             DataContext = this;
             Items = new ObservableCollection<Contrato>();
-            PopulateGrid();
+            PopulateGridAsync();
         }
 
-        public async void PopulateGrid()
+        public async void PopulateGridAsync()
         {
             ControladorContrato ctrl = new ControladorContrato();
             Items.Clear();
@@ -45,7 +45,7 @@ namespace Contratos
             { Owner = this };
             altaContratoVentana.ShowDialog();
             if (altaContratoVentana.Refrescar)
-                PopulateGrid();
+                PopulateGridAsync();
         }
 
         private void MenuCondicion_Click(object sender, RoutedEventArgs e)
@@ -104,7 +104,7 @@ namespace Contratos
             { Owner = this };
             verEditarContratoVentana.ShowDialog();
             if (verEditarContratoVentana.Refrescar)
-                PopulateGrid();
+                PopulateGridAsync();
         }
 
         private void MenuVerProveedores_Click(object sender, RoutedEventArgs e)
@@ -120,12 +120,12 @@ namespace Contratos
             { Owner = this };
             generarContrato.ShowDialog();
             if (generarContrato.Refrescar)
-                PopulateGrid();
+                PopulateGridAsync();
         }
 
         private void Refrescar_Click(object sender, RoutedEventArgs e)
         {
-            PopulateGrid();
+            PopulateGridAsync();
         }
     }
 }
