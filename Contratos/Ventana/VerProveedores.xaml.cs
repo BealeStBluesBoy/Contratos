@@ -37,8 +37,7 @@ namespace Contratos
 
         private void PopulateGrid()
         {
-            ControladorProveedor dbProveedor = new ControladorProveedor();
-            var provs = dbProveedor.VerTodos();
+            var provs = ControladorProveedor.VerTodos();
             List<GridItem> lista = new List<GridItem>();
             if (provs != null)
             {

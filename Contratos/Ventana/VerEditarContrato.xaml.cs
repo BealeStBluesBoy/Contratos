@@ -81,8 +81,7 @@ namespace Contratos
 
         private void PopulateComboBox()
         {
-            ControladorGrano ctrl = new ControladorGrano();
-            var granos = ctrl.VerTodos();
+            var granos = ControladorGrano.VerTodos();
             var lista = new List<string>();
             if (granos != null)
             {

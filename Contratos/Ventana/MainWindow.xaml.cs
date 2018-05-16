@@ -14,7 +14,7 @@ namespace Contratos
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Contrato> Items { get; set; }
+        public ObservableCollection<Contrato> Items { get; protected set; }
 
         public MainWindow()
         {

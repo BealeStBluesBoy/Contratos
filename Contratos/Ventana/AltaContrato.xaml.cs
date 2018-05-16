@@ -26,8 +26,7 @@ namespace Contratos
 
         private void PopulateComboBox()
         {
-            ControladorGrano ctrl = new ControladorGrano();
-            var granos = ctrl.VerTodos();
+            var granos = ControladorGrano.VerTodos();
             var lista = new List<string>();
             if (granos != null)
             {
@@ -40,13 +39,12 @@ namespace Contratos
 
         private void ChequearProveedor_Click(object sender, RoutedEventArgs e)
         {
-            ControladorProveedor ctrl = new ControladorProveedor();
             if (cuitCuil.Text != "")
             {
-                if (ctrl.Existe(cuitCuil.Text))
+                if (!ControladorProveedor.Existe(cuitCuil.Text))
                     MessageBox.Show("El Proveedor no existe", "Resultado", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 else
-                    MessageBox.Show("El Proveedor es " + ctrl.VerProveedor(cuitCuil.Text).RazonSocial, "Resultado", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("El Proveedor es " + ControladorProveedor.VerProveedor(cuitCuil.Text).RazonSocial, "Resultado", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
         }
 
@@ -95,7 +93,6 @@ namespace Contratos
 
         private void GuardarSalirContrato_Click(object sender, RoutedEventArgs e)
         {
-            ControladorProveedor ctrlPro = new ControladorProveedor();
             if (cuitCuil.Text != "" &&
             granoTipo.Text != "" &&
             numero.Text != "" &&
@@ -105,7 +102,7 @@ namespace Contratos
             fechaLimite.SelectedDate != null &&
             Items.Count != 0)
             {
-                if (ctrlPro.VerProveedor(cuitCuil.Text) != null)
+                if (ControladorProveedor.VerProveedor(cuitCuil.Text) != null)
                 {
                     string tipoCantidad;
                     List<ContratoDetalle> detalles = Items.ToList();

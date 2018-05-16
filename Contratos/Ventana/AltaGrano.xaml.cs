@@ -16,8 +16,7 @@ namespace Contratos
 
         private void GuardarGrano_Click(object sender, RoutedEventArgs e)
         {
-            ControladorGrano ctrl = new ControladorGrano();
-            if (tipoGrano.Text != "" && ctrl.IngresarGrano(tipoGrano.Text))
+            if (tipoGrano.Text != "" && ControladorGrano.IngresarGrano(tipoGrano.Text))
             {
                 Refrescar = true;
                 MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Asterisk);
@@ -33,8 +32,7 @@ namespace Contratos
 
         private void GuardarSalirGrano_Click(object sender, RoutedEventArgs e)
         {
-            ControladorGrano ctrl = new ControladorGrano();
-            if (tipoGrano.Text != "" && ctrl.IngresarGrano(tipoGrano.Text))
+            if (tipoGrano.Text != "" && ControladorGrano.IngresarGrano(tipoGrano.Text))
             {
                 MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 Refrescar = true;

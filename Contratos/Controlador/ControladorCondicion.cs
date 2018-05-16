@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.Windows;
 
 namespace Contratos
 {
-    public class ControladorCondicion
+    public static class ControladorCondicion
     {
-        public bool IngresarCondicion(string nombre, string unidad)
+        public static bool IngresarCondicion(string nombre, string unidad)
         {
             PersistenciaCondicion db = new PersistenciaCondicion();
             return (db.Insert(nombre, unidad));
         }
 
-        public Condicion VerCondicion(string nombre)
+        public static Condicion VerCondicion(string nombre)
         {
             PersistenciaCondicion db = new PersistenciaCondicion();
             return db.Select(nombre);
         }
 
-        public List<Condicion> VerTodos()
+        public static List<Condicion> VerTodos()
         {
             PersistenciaCondicion db = new PersistenciaCondicion();
             return db.SelectAll();

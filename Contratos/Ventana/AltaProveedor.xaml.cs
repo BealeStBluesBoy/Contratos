@@ -16,10 +16,9 @@ namespace Contratos
 
         private void GuardarProveedor_Click(object sender, RoutedEventArgs e)
         {
-            ControladorProveedor ctrl = new ControladorProveedor();
             if (razonSocial.Text != "" && cuitCuil.Text != "" && iiBB.Text != "" && inicioActividades.Text != "")
             {
-                if (ctrl.IngresarProveedor(
+                if (ControladorProveedor.IngresarProveedor(
                     cuitCuil.Text,
                     razonSocial.Text,
                     iiBB.Text,

@@ -28,8 +28,7 @@ namespace Contratos
 
             List<ContratoDetalle> RandomDetalles()
             {
-                ControladorCondicion ctrl = new ControladorCondicion();
-                List<Condicion> condAct = ctrl.VerTodos();
+                List<Condicion> condAct = ControladorCondicion.VerTodos();
                 IList<Condicion> indCond = condAct;
 
                 List<ContratoDetalle> ret = new List<ContratoDetalle>();
@@ -50,12 +49,10 @@ namespace Contratos
             {
                 int cantGen = Int32.Parse(Cantidad.Text);
 
-                ControladorProveedor ctrlProv = new ControladorProveedor();
-                List<Proveedor> provAct = ctrlProv.VerTodos();
+                List<Proveedor> provAct = ControladorProveedor.VerTodos();
                 IList<Proveedor> indProv = provAct;
 
-                ControladorGrano ctrlGrano = new ControladorGrano();
-                List<Grano> granoAct = ctrlGrano.VerTodos();
+                List<Grano> granoAct = ControladorGrano.VerTodos();
                 IList<Grano> indGrano = granoAct;
 
                 List<Contrato> contAct = ControladorContrato.VerTodos();

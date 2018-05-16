@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Contratos
 {
-    public class ControladorProveedor
+    public static class ControladorProveedor
     {
-        public bool IngresarProveedor(string cuitCuil, string razonSocial, string ingresosBrutos, DateTime inicioActividades)
+        public static bool IngresarProveedor(string cuitCuil, string razonSocial, string ingresosBrutos, DateTime inicioActividades)
         {
             PersistenciaProveedor db = new PersistenciaProveedor();
             if (db.Insert(cuitCuil, razonSocial) && db.Insert(cuitCuil, ingresosBrutos, inicioActividades))
@@ -15,28 +15,28 @@ namespace Contratos
             return false;
         }
 
-        public Proveedor VerProveedor(string cuitCuil)
+        public static Proveedor VerProveedor(string cuitCuil)
         {
             PersistenciaProveedor db = new PersistenciaProveedor();
             return db.Select(cuitCuil);
         }
 
-        public void EliminarProveedor(string cuitCuil) /// De dudosa utilidad, los Proveedores debieran mantenerse
+        public static void EliminarProveedor(string cuitCuil) /// De dudosa utilidad, los Proveedores debieran mantenerse
         {
             PersistenciaProveedor db = new PersistenciaProveedor();
             db.Delete(cuitCuil);
         }
 
-        public List<Proveedor> VerTodos()
+        public static List<Proveedor> VerTodos()
         {
             PersistenciaProveedor db = new PersistenciaProveedor();
             return db.SelectAll();
         }
 
-        public bool Existe(string cuitCuil)
+        public static bool Existe(string cuitCuil)
         {
             PersistenciaProveedor db = new PersistenciaProveedor();
-            return db.GetID(cuitCuil) == -1;
+            return db.GetID(cuitCuil) != -1;
         }
     }
 }

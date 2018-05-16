@@ -22,8 +22,7 @@ namespace Contratos
 
         private void PopulateComboBox()
         {
-            ControladorCondicion ctrl = new ControladorCondicion();
-            var condiciones = ctrl.VerTodos();
+            var condiciones = ControladorCondicion.VerTodos();
             var lista = new List<string>();
             if (condiciones != null)
             {
@@ -47,8 +46,7 @@ namespace Contratos
             if (valorDetalle.Text != "" && nombreCondicion.Text != "")
             {
                 Nombre = nombreCondicion.Text;
-                ControladorCondicion ctrl = new ControladorCondicion();
-                Unidad = ctrl.VerCondicion(nombreCondicion.Text).Unidad;
+                Unidad = ControladorCondicion.VerCondicion(nombreCondicion.Text).Unidad;
                 Valor = float.Parse(valorDetalle.Text);
                 Close();
             }
