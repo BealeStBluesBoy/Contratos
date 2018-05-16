@@ -33,6 +33,7 @@
             </MenuItem>
             <MenuItem Header="Herramientas">
                 <MenuItem Header="Generador aleatorio" Click="MenuGen_Click"/>
+                <MenuItem Header="Eliminar todos" Click="MenuEliminarTodos_Click"/>
             </MenuItem>
             <MenuItem Header="Ayuda">
                 <MenuItem Header="Acerca de Molino..."/>

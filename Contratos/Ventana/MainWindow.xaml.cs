@@ -41,7 +41,18 @@ namespace Contratos
 
         private void ControladorContrato_ContratoCreado(object sender, Contrato e)
         {
-            Items.Insert(Items.IndexOf(Items.First(x => x.Numero > e.Numero)), e);
+            if (Items.Count(x => x.Numero > e.Numero) == 0)
+            {
+                Items.Add(e);
+            }
+            else if (Items.Count(x => x.Numero < e.Numero) == 0)
+            {
+                Items.Insert(0, e);
+            }
+            else
+            {
+                Items.Insert(Items.IndexOf(Items.First(x => x.Numero > e.Numero)), e);
+            }
         }
 
         private async void PopulateGridAsync()
@@ -139,6 +150,14 @@ namespace Contratos
         private void Refrescar_Click(object sender, RoutedEventArgs e)
         {
             PopulateGridAsync();
+        }
+
+        private void MenuEliminarTodos_Click(object sender, RoutedEventArgs e)
+        {
+            ControladorContrato.VerTodos().ForEach(x =>
+            {
+                ControladorContrato.EliminarContrato(x.Numero);
+            });
         }
     }
 }

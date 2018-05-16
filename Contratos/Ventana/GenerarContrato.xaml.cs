@@ -28,17 +28,16 @@ namespace Contratos
 
             List<ContratoDetalle> RandomDetalles()
             {
-                List<Condicion> condAct = ControladorCondicion.VerTodos();
-                IList<Condicion> indCond = condAct;
+                IList<Condicion> condAct = ControladorCondicion.VerTodos();
 
                 List<ContratoDetalle> ret = new List<ContratoDetalle>();
 
-                int tope = rnd.Next(1, 5);
+                int tope = rnd.Next(1, condAct.Count);
                 for (int i = 0; i <= tope; i++)
                 {
                     var det = new ContratoDetalle(rnd.Next(1, 10))
                     {
-                        Condicion = indCond[i]
+                        Condicion = condAct[i]
                     };
                     ret.Add(det);
                 }
@@ -49,16 +48,12 @@ namespace Contratos
             {
                 int cantGen = Int32.Parse(Cantidad.Text);
 
-                List<Proveedor> provAct = ControladorProveedor.VerTodos();
-                IList<Proveedor> indProv = provAct;
-
-                List<Grano> granoAct = ControladorGrano.VerTodos();
-                IList<Grano> indGrano = granoAct;
+                IList<Proveedor> provAct = ControladorProveedor.VerTodos();
+                IList<Grano> granoAct = ControladorGrano.VerTodos();
 
                 List<Contrato> contAct = ControladorContrato.VerTodos();
-                List<int> numOcupados = new List<int>();
+                IList<int> numOcupados = new List<int>();
                 contAct.ForEach(x => { numOcupados.Add(x.Numero); });
-                IList<int> indCont = numOcupados;
                 int cantActual = contAct.Count;
 
                 for (int i = 1; i <= cantGen; i++)
@@ -66,16 +61,16 @@ namespace Contratos
                     int contNum;
                     do
                     {
-                        contNum = rnd.Next(1, 99999999);
+                        contNum = rnd.Next(1, 9999);
                     } while (numOcupados.Contains(contNum));
 
                     var indiceProv = rnd.Next(0, provAct.Count);
                     var indiceGrano = rnd.Next(0, granoAct.Count);
 
                     if (ControladorContrato.IngresarContrato(
-                        indProv[indiceProv].CuitCuil,
+                        provAct[indiceProv].CuitCuil,
                         RandomDetalles(),
-                        indGrano[indiceGrano].Tipo,
+                        granoAct[indiceGrano].Tipo,
                         rnd.Next(1, 25),
                         DateTime.Today,
                         DateTime.Today.AddDays(rnd.Next(10, 60)),
@@ -85,7 +80,7 @@ namespace Contratos
                         ))
                     {
                         cantActual++;
-                        indCont.Add(contNum);
+                        numOcupados.Add(contNum);
                     }
                     else
                     {
