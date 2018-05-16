@@ -14,7 +14,6 @@ namespace Contratos
     /// </summary>
     public partial class AltaContrato : Window
     {
-        public bool Refrescar = false;
         public ObservableCollection<ContratoDetalle> Items { get; set; }
 
         public AltaContrato()
@@ -128,7 +127,6 @@ namespace Contratos
                         tipoCantidad))
                     {
                         MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Refrescar = true;
                         Close();
                     }
                     else MessageBox.Show("Error en la operación. Compruebe los datos o contacte con el administrador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

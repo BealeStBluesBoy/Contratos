@@ -22,7 +22,21 @@ namespace Contratos
             DataContext = this;
             Items = new ObservableCollection<Contrato>();
             ControladorContrato.ContratoCreado += ControladorContrato_ContratoCreado;
+            ControladorContrato.ContratoEliminado += ControladorContrato_ContratoEliminado;
+            ControladorContrato.ContratoActualizado += ControladorContrato_ContratoActualizado;
             PopulateGridAsync();
+        }
+
+        private void ControladorContrato_ContratoActualizado(object sender, Contrato e)
+        {
+            int indice = Items.IndexOf(Items.First(x => x.Numero == e.Numero));
+            Items.Remove(Items.First(x => x.Numero == e.Numero));
+            Items.Insert(indice, e);
+        }
+
+        private void ControladorContrato_ContratoEliminado(object sender, Contrato e)
+        {
+            Items.Remove(Items.First(x => x.Numero == e.Numero));
         }
 
         private void ControladorContrato_ContratoCreado(object sender, Contrato e)
@@ -104,8 +118,6 @@ namespace Contratos
             VerEditarContrato verEditarContratoVentana = new VerEditarContrato((Contrato)grillaContratos.SelectedItem)
             { Owner = this };
             verEditarContratoVentana.ShowDialog();
-            if (verEditarContratoVentana.Refrescar)
-                PopulateGridAsync();
         }
 
         private void MenuVerProveedores_Click(object sender, RoutedEventArgs e)

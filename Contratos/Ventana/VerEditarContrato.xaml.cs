@@ -14,7 +14,6 @@ namespace Contratos
     /// </summary>
     public partial class VerEditarContrato : Window
     {
-        public bool Refrescar = false;
         private bool enableEdit = false;
         private DateTime fechaLabraAux;
         private int numeroaux;
@@ -184,7 +183,6 @@ namespace Contratos
                         detalles))
                     {
                         MessageBox.Show("Operación exitosa", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Refrescar = true;
                         Close();
                     }
                     else MessageBox.Show("Error en la operación. Compruebe los datos o contacte con el administrador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -235,7 +233,6 @@ namespace Contratos
                 if (ControladorContrato.EliminarContrato(numeroaux))
                 {
                     MessageBox.Show("Contrato eliminado satisfactoriamente", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Refrescar = true;
                     Close();
                 }
                 else MessageBox.Show("Error en la operación, no se ha podido eliminar el contrato. Contacte con el administrador si el problema persiste.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -260,7 +257,6 @@ namespace Contratos
                         Estado.Content = "Estado: Cerrado";
                         EditarContrato.IsEnabled = false;
                         MessageBox.Show("Contrato cerrado satisfactoriamente", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Refrescar = true;
                     }
                     else MessageBox.Show("Error en la operación, no se ha podido cerrar el contrato. Contacte con el administrador si el problema persiste.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

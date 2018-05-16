@@ -8,7 +8,9 @@ namespace Contratos
         /// Ver notas en la Persistencia
 
         public static event EventHandler<Contrato> ContratoCreado;
-        
+        public static event EventHandler<Contrato> ContratoEliminado;
+        public static event EventHandler<Contrato> ContratoActualizado;
+
         public static bool IngresarContrato(string cuitCuilProveedor, List<ContratoDetalle> detalles, string tipoGrano, int cantidad, DateTime fechaLabra, DateTime fechaLimite, int numero, float precio, string tipo)
         {
             bool ret = false;
@@ -45,6 +47,7 @@ namespace Contratos
         public static bool EliminarContrato(int numero) /// Elimina solamente Contrato y sus ContratoDetalle
         {
             PersistenciaContrato db = new PersistenciaContrato();
+            ContratoEliminado?.Invoke(null, VerContrato(numero));
             return db.Delete(numero);
         }
 
@@ -56,7 +59,10 @@ namespace Contratos
                 dbDetalles.Insert(numero, x.Condicion.Nombre, x.Valor);
             });
             PersistenciaContrato dbContrato = new PersistenciaContrato();
-            return dbContrato.Update(numero, cantidad, fechaLimite, precio, tipoGrano, tipoContrato);
+            bool ret = dbContrato.Update(numero, cantidad, fechaLimite, precio, tipoGrano, tipoContrato);
+            if (ret)
+                ContratoActualizado?.Invoke(null, VerContrato(numero));
+            return ret;
         }
     }
 }
