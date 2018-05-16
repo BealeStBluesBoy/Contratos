@@ -157,7 +157,6 @@ namespace Contratos
             }
             else if (enableEdit == true)
             {
-                ControladorContrato ctrl = new ControladorContrato();
                 if ((granoTipo.Text != "") &&
                 (valor.Text != "") &&
                 (precio.Text != "") &&
@@ -176,7 +175,7 @@ namespace Contratos
                         detalles.Add(det);
                     });
                     
-                    if(ctrl.ActualizarContrato(numeroaux, 
+                    if(ControladorContrato.ActualizarContrato(numeroaux, 
                         Int32.Parse(valor.Text),
                         (DateTime)fechaLimite.SelectedDate, 
                         float.Parse(precio.Text, System.Globalization.CultureInfo.InvariantCulture.NumberFormat), 
@@ -233,8 +232,7 @@ namespace Contratos
             MessageBoxResult resultado = MessageBox.Show("¿Está seguro de querer eliminar este contrato?", "Eliminar contrato", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resultado == MessageBoxResult.Yes)
             {
-                ControladorContrato ctrl = new ControladorContrato();
-                if (ctrl.EliminarContrato(numeroaux))
+                if (ControladorContrato.EliminarContrato(numeroaux))
                 {
                     MessageBox.Show("Contrato eliminado satisfactoriamente", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     Refrescar = true;
@@ -255,8 +253,7 @@ namespace Contratos
                 MessageBoxResult resultado = MessageBox.Show("¿Está seguro de querer cerrar este contrato?", "Cerrar contrato", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (resultado == MessageBoxResult.Yes)
                 {
-                    ControladorContrato ctrl = new ControladorContrato();
-                    if (ctrl.CerrarContrato(numeroaux))
+                    if (ControladorContrato.CerrarContrato(numeroaux))
                     {
                         CerrarContrato.Visibility = Visibility.Collapsed;
                         EditarContrato.Visibility = Visibility.Collapsed;

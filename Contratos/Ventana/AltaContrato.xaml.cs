@@ -116,8 +116,7 @@ namespace Contratos
                     else
                         tipoCantidad = "Toneladas";
 
-                    ControladorContrato ctrlCon = new ControladorContrato();
-                    if (ctrlCon.IngresarContrato(
+                    if (ControladorContrato.IngresarContrato(
                         cuitCuil.Text,
                         detalles,
                         granoTipo.Text,

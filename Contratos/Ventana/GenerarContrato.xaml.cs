@@ -58,8 +58,7 @@ namespace Contratos
                 List<Grano> granoAct = ctrlGrano.VerTodos();
                 IList<Grano> indGrano = granoAct;
 
-                ControladorContrato ctrlCont = new ControladorContrato();
-                List<Contrato> contAct = ctrlCont.VerTodos();
+                List<Contrato> contAct = ControladorContrato.VerTodos();
                 List<int> numOcupados = new List<int>();
                 contAct.ForEach(x => { numOcupados.Add(x.Numero); });
                 IList<int> indCont = numOcupados;
@@ -76,7 +75,7 @@ namespace Contratos
                     var indiceProv = rnd.Next(0, provAct.Count);
                     var indiceGrano = rnd.Next(0, granoAct.Count);
 
-                    if (ctrlCont.IngresarContrato(
+                    if (ControladorContrato.IngresarContrato(
                         indProv[indiceProv].CuitCuil,
                         RandomDetalles(),
                         indGrano[indiceGrano].Tipo,

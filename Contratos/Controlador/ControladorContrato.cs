@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Contratos
 {
-    public class ControladorContrato
+    public static class ControladorContrato
     {
         /// Ver notas en la Persistencia
         
-        public bool IngresarContrato(string cuitCuilProveedor, List<ContratoDetalle> detalles, string tipoGrano, int cantidad, DateTime fechaLabra, DateTime fechaLimite, int numero, float precio, string tipo)
+        public static bool IngresarContrato(string cuitCuilProveedor, List<ContratoDetalle> detalles, string tipoGrano, int cantidad, DateTime fechaLabra, DateTime fechaLimite, int numero, float precio, string tipo)
         {
             bool ret = false;
             PersistenciaContrato dbContrato = new PersistenciaContrato();
@@ -21,31 +21,31 @@ namespace Contratos
             return ret;
         }
 
-        public Contrato VerContrato(int numero)
+        public static Contrato VerContrato(int numero)
         {
             PersistenciaContrato dbContrato = new PersistenciaContrato();
             return dbContrato.Select(numero);
         }
 
-        public bool CerrarContrato(int numero)
+        public static bool CerrarContrato(int numero)
         {
             PersistenciaContrato dbContrato = new PersistenciaContrato();
             return dbContrato.Close(numero);
         }
 
-        public List<Contrato> VerTodos()
+        public static List<Contrato> VerTodos()
         {
             PersistenciaContrato dbContrato = new PersistenciaContrato();
             return dbContrato.SelectAll();
         }
 
-        public bool EliminarContrato(int numero) /// Elimina solamente Contrato y sus ContratoDetalle
+        public static bool EliminarContrato(int numero) /// Elimina solamente Contrato y sus ContratoDetalle
         {
             PersistenciaContrato db = new PersistenciaContrato();
             return db.Delete(numero);
         }
 
-        public bool ActualizarContrato(int numero, int cantidad, DateTime fechaLimite, float precio, string tipoGrano, string tipoContrato, List<ContratoDetalle> detalles)
+        public static bool ActualizarContrato(int numero, int cantidad, DateTime fechaLimite, float precio, string tipoGrano, string tipoContrato, List<ContratoDetalle> detalles)
         {
             PersistenciaContratoDetalle dbDetalles = new PersistenciaContratoDetalle();
             dbDetalles.Delete(numero);

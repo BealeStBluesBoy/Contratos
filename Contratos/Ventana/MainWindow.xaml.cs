@@ -26,11 +26,10 @@ namespace Contratos
 
         public async void PopulateGridAsync()
         {
-            ControladorContrato ctrl = new ControladorContrato();
             Items.Clear();
             List<Contrato> auxItems = new List<Contrato>();
             await Task.Run(() => {
-                auxItems = ctrl.VerTodos();
+                auxItems = ControladorContrato.VerTodos();
             });
             auxItems.ForEach(x => {
                 Items.Add(x);
