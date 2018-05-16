@@ -41,7 +41,7 @@ namespace Contratos
 
         private void ControladorContrato_ContratoCreado(object sender, Contrato e)
         {
-            Items.Add(e);
+            Items.Insert(Items.IndexOf(Items.First(x => x.Numero > e.Numero)), e);
         }
 
         private async void PopulateGridAsync()
