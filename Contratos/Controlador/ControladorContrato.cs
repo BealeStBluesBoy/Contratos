@@ -6,6 +6,8 @@ namespace Contratos
     public static class ControladorContrato
     {
         /// Ver notas en la Persistencia
+
+        public static event EventHandler<Contrato> ContratoCreado;
         
         public static bool IngresarContrato(string cuitCuilProveedor, List<ContratoDetalle> detalles, string tipoGrano, int cantidad, DateTime fechaLabra, DateTime fechaLimite, int numero, float precio, string tipo)
         {
@@ -18,6 +20,7 @@ namespace Contratos
                     ret = dbDetalles.Insert(numero, x.Condicion.Nombre, x.Valor); /// Despues inserto los ContratoDetalle para finalizar los linkeos
                 });
             }
+            ContratoCreado?.Invoke(null, VerContrato(numero));
             return ret;
         }
 
