@@ -9,9 +9,8 @@ namespace Contratos
         public DateTime InicioActividades { get; set; }
         public List<Contrato> Contratos { get; set; }
 
-        public Proveedor(int id, string cuitCuil, string razonSocial, string ingresosBrutos, DateTime iniActividades) : base(id, cuitCuil, razonSocial)
+        public Proveedor(string cuitCuil, string razonSocial, string ingresosBrutos, DateTime iniActividades) : base(cuitCuil, razonSocial)
         {
-            Id = id;
             IngresosBrutos = ingresosBrutos;
             InicioActividades = iniActividades;
             CuitCuil = cuitCuil;

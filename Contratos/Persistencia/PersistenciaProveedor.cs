@@ -42,7 +42,6 @@ namespace Contratos
                 if (reader.Read())
                 {
                     ret = new Proveedor(
-                        reader.GetInt32("id"),
                         reader.GetString("cuitCuil"),
                         reader.GetString("razonSocial"),
                         reader.GetString("ingresosBrutos"),

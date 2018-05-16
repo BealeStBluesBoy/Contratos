@@ -2,14 +2,12 @@
 {
     public class ContratoDetalle
     {
-        public int Id { get; set; }
         public float Valor { get; set; }
         public Condicion Condicion { get; set; }
         public Contrato Contrato { get; set; }
 
-        public ContratoDetalle(int id, float val)
+        public ContratoDetalle(float val)
         {
-            Id = id;
             Valor = val;
             Condicion = null;
             Contrato = null;

@@ -72,11 +72,9 @@ namespace Contratos
                 while (reader.Read())
                 {
                     var detalle = new ContratoDetalle(
-                        reader.GetInt32("idDet"),
                         reader.GetFloat("valor")
                         );
                     var condicion = new Condicion(
-                        reader.GetInt32("idCon"),
                         reader.GetString("nombre"),
                         reader.GetString("unidad")
                         );

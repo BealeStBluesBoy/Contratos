@@ -36,7 +36,7 @@ namespace Contratos
                 int tope = rnd.Next(1, 5);
                 for (int i = 0; i <= tope; i++)
                 {
-                    var det = new ContratoDetalle(0, rnd.Next(1, 10))
+                    var det = new ContratoDetalle(rnd.Next(1, 10))
                     {
                         Condicion = indCond[i]
                     };

@@ -40,7 +40,6 @@ namespace Contratos
                 if (reader.Read())
                 {
                     ret = new Condicion(
-                        reader.GetInt32("id"),
                         reader.GetString("nombre"),
                         reader.GetString("unidad")
                     );
@@ -62,7 +61,6 @@ namespace Contratos
                 while (reader.Read())
                 {
                     var condicion = new Condicion(
-                        reader.GetInt32("id"),
                         reader.GetString("nombre"),
                         reader.GetString("unidad")
                     );

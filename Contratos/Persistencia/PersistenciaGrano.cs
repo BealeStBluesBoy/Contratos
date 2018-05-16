@@ -37,7 +37,7 @@ namespace Contratos
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    ret = new Grano(reader.GetInt32("id"), tipo);
+                    ret = new Grano(tipo);
                 }
             }
             CloseConnection();
@@ -55,7 +55,6 @@ namespace Contratos
                 while (reader.Read())
                 {
                     var grano = new Grano(
-                        reader.GetInt32("id"),
                         reader.GetString("tipo")
                     );
                     ret.Add(grano);

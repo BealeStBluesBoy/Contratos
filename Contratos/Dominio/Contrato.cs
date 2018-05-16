@@ -5,7 +5,6 @@ namespace Contratos
 {
     public class Contrato
     {
-        public int Id { get; set; }
         public int Cantidad { get; set; }
         public bool Cerrado { get; set; }
         public DateTime FechaLabra { get; set; }

@@ -4,13 +4,11 @@ namespace Contratos
 {
     public class Grano
     {
-        public int Id { get; set; }
         public string Tipo { get; set; }
         public List<Contrato> Contratos { get; set; }
 
-        public Grano(int id, string tipo)
+        public Grano(string tipo)
         {
-            Id = id;
             Tipo = tipo;
             Contratos = new List<Contrato>();
         }

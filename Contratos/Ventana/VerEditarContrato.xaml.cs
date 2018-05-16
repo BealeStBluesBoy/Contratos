@@ -167,8 +167,8 @@ namespace Contratos
                     List<ContratoDetalle> detalles = new List<ContratoDetalle>();
                     items.ToList().ForEach(x =>
                     {
-                        var condicion = new Condicion(0, x.Nombre, x.Unidad);
-                        var det = new ContratoDetalle(0, x.Valor);
+                        var condicion = new Condicion(x.Nombre, x.Unidad);
+                        var det = new ContratoDetalle(x.Valor);
                         det.AgregarCondicion(condicion);
                         detalles.Add(det);
                     });

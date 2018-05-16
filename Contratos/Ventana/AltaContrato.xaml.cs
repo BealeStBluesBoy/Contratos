@@ -71,9 +71,9 @@ namespace Contratos
             altaDetalleVentana.ShowDialog();
             if (altaDetalleVentana.Nombre != "" && altaDetalleVentana.Unidad != "" && altaDetalleVentana.Valor != 0)
             {
-                var item = new ContratoDetalle(0, altaDetalleVentana.Valor)
+                var item = new ContratoDetalle(altaDetalleVentana.Valor)
                 {
-                    Condicion = new Condicion(0, altaDetalleVentana.Nombre, altaDetalleVentana.Unidad)
+                    Condicion = new Condicion(altaDetalleVentana.Nombre, altaDetalleVentana.Unidad)
                 };
                 if (!Items.Any(x => x.Condicion.Nombre == altaDetalleVentana.Nombre))
                 {
