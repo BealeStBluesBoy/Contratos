@@ -15,28 +15,14 @@ namespace Contratos
     public partial class AltaContrato : Window
     {
         public bool Refrescar = false;
-        public ObservableCollection<GridItem> Items { get; set; }
+        public ObservableCollection<ContratoDetalle> Items { get; set; }
 
         public AltaContrato()
         {
             InitializeComponent();
             DataContext = this;
-            Items = new ObservableCollection<GridItem>();
+            Items = new ObservableCollection<ContratoDetalle>();
             PopulateComboBox();
-        }
-
-        public class GridItem
-        {
-            public string Condicion { get; set; }
-            public float Valor { get; set; }
-            public string Unidad { get; set; }
-
-            public GridItem(string nom, string unid, float val)
-            {
-                Condicion = nom;
-                Unidad = unid;
-                Valor = val;
-            }
         }
 
         private void PopulateComboBox()
@@ -88,14 +74,11 @@ namespace Contratos
             altaDetalleVentana.ShowDialog();
             if (altaDetalleVentana.Nombre != "" && altaDetalleVentana.Unidad != "" && altaDetalleVentana.Valor != 0)
             {
-                var item = new GridItem(altaDetalleVentana.Nombre, altaDetalleVentana.Unidad, altaDetalleVentana.Valor);
-                bool existe = false;
-                Items.ToList().ForEach(x =>
+                var item = new ContratoDetalle(0, altaDetalleVentana.Valor)
                 {
-                    if (x.Condicion == altaDetalleVentana.Nombre)
-                        existe = true;
-                });
-                if (!existe)
+                    Condicion = new Condicion(0, altaDetalleVentana.Nombre, altaDetalleVentana.Unidad)
+                };
+                if (!Items.Any(x => x.Condicion.Nombre == altaDetalleVentana.Nombre))
                 {
                     Items.Add(item);
                 }
@@ -126,14 +109,7 @@ namespace Contratos
                 if (ctrlPro.VerProveedor(cuitCuil.Text) != null)
                 {
                     string tipoCantidad;
-                    List<ContratoDetalle> detalles = new List<ContratoDetalle>();
-                    Items.ToList().ForEach(x =>
-                    {
-                        var condicion = new Condicion(0, x.Condicion, x.Unidad);
-                        var det = new ContratoDetalle(0, x.Valor);
-                        det.AgregarCondicion(condicion);
-                        detalles.Add(det);
-                    });
+                    List<ContratoDetalle> detalles = Items.ToList();
 
                     if (Camiones.IsChecked == true)
                         tipoCantidad = "Camiones";
@@ -173,17 +149,8 @@ namespace Contratos
         {
             if (Items.Count != 0 && grillaDetalles.SelectedItem != null)
             {
-                int cantElementos = Items.Count;
-                Items.ToList().ForEach(x =>
-                {
-                    while (cantElementos == Items.Count)
-                    {
-                        GridItem item = (GridItem)grillaDetalles.SelectedItem;
-                        if (x.Condicion == item.Condicion)
-                            Items.RemoveAt(grillaDetalles.Items.IndexOf(grillaDetalles.SelectedItem));
-                        break;
-                    }
-                });
+                ContratoDetalle item = (ContratoDetalle)grillaDetalles.SelectedItem;
+                Items.Remove(item);
             }
         }
 

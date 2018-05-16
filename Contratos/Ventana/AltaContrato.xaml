@@ -67,10 +67,17 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid Name="grillaDetalles"
                           CanUserResizeColumns="False"
+                          AutoGenerateColumns="False"
                           CanUserResizeRows="False"
                           Grid.Column="0"
                           IsReadOnly="True"
-                          ItemsSource="{Binding Items}"/>
+                          ItemsSource="{Binding Items}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Condicion" Binding="{Binding Condicion.Nombre}"/>
+                        <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                        <DataGridTextColumn Header="Unidad" Binding="{Binding Condicion.Unidad}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
                 <StackPanel Grid.Column="1">
                     <Button Name="NuevoDetalle"
                             Content="Nuevo"
