@@ -14,7 +14,7 @@ namespace Contratos.Persistencia
         {
             if ((GetID(cuitCuil) == -1) && OpenConnection()) /// Si existe la Persona no tiene sentido insertarla
             {
-                var Query = string.Format("INSERT INTO Persona (cuitCuil, razonSocial) VALUES ('{0}','{1}');", cuitCuil, razonSocial);
+                var Query = $"INSERT INTO Persona (cuitCuil, razonSocial) VALUES ('{cuitCuil}','{razonSocial}');";
                 MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                 Cmd.ExecuteNonQuery();
                 CloseConnection();

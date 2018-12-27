@@ -12,7 +12,8 @@ namespace Contratos.Persistencia
             int idPersona = base.GetID(cuitCuil);
             if (idPersona != -1 && GetID(cuitCuil) == -1 && OpenConnection()) /// Chequea que exista la Persona en la DB
             {
-                var Query = string.Format("INSERT INTO Proveedor (Persona_id, ingresosBrutos, inicioActividades) VALUES ('{0}','{1}','{2}');", idPersona, ingresosBrutos, inicioActividades.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                var Query = "INSERT INTO Proveedor (Persona_id, ingresosBrutos, inicioActividades) " +
+                    $"VALUES ('{idPersona}','{ingresosBrutos}','{inicioActividades.ToString("yyyy-MM-dd HH:mm:ss.fff")}');";
                 MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                 Cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -58,11 +59,11 @@ namespace Contratos.Persistencia
             int ret = -1;
             if (OpenConnection())
             {
-                var Query = string.Format("SELECT " +
+                var Query = "SELECT " +
                     "Proveedor.id " +
                     "FROM Proveedor " +
-                    "INNER JOIN (SELECT Persona.id FROM Persona WHERE cuitCuil = '{0}') AS Derived " +
-                    "ON Derived.id = Proveedor.Persona_id;", cuitCuil);
+                    $"INNER JOIN (SELECT Persona.id FROM Persona WHERE cuitCuil = '{cuitCuil}') AS Derived " +
+                    "ON Derived.id = Proveedor.Persona_id;";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 if (cmd.ExecuteScalar() != null)
                 {
@@ -79,7 +80,7 @@ namespace Contratos.Persistencia
             int idProveedor = GetID(cuitCuil);
             if (idProveedor != -1 && OpenConnection())
             {
-                var Query = string.Format("DELETE FROM Proveedor WHERE Persona_id='{0}';", idPersona);
+                var Query = $"DELETE FROM Proveedor WHERE Persona_id='{idPersona}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -93,24 +94,29 @@ namespace Contratos.Persistencia
 
         public List<Proveedor> SelectAll() /// Vamo a hacerlo sencillo
         {
-            List<Proveedor> ret = new List<Proveedor>();
+            List<Proveedor> ret = null;
             List<string> cuilsProvs = new List<string>();
 
             if (OpenConnection())
             {
-                var Query = "SELECT DISTINCT Per.cuitCuil FROM Proveedor Pro INNER JOIN Persona Per ON Pro.Persona_id = Per.id;";
+                var Query = "SELECT DISTINCT Per.cuitCuil FROM Proveedor Pro " +
+                    "INNER JOIN Persona Per ON Pro.Persona_id = Per.id;";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (cmd.LastInsertedId != -1)
                 {
-                    cuilsProvs.Add(reader.GetString("cuitCuil"));
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cuilsProvs.Add(reader.GetString("cuitCuil"));
+                    }
                 }
                 CloseConnection();
-            }
 
-            cuilsProvs.ForEach(x => {
-                ret.Add(Select(x));
-            });
+                ret = new List<Proveedor>();
+                cuilsProvs.ForEach(x => {
+                    ret.Add(Select(x));
+                });
+            }
 
             return ret;
         }

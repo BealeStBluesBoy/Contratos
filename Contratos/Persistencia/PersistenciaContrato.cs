@@ -43,18 +43,11 @@ namespace Contratos.Persistencia
 
                 if (idGrano != -1 && idProveedor != -1 && OpenConnection()) /// y que existan las partes
                 {
-                    var Query = string.Format(
-                        "INSERT INTO Contrato (Proveedor_id, Grano_id, tipoContrato, cantidad, cerrado, fechaLabra, fechaLimite, numero, precio)" +
-                        "VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')",
-                        idProveedor,
-                        idGrano,
-                        tipoContrato,
-                        cantidad,
-                        0,
-                        fechaLabra.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                        fechaLimite.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                        numero,
-                        precio);
+                    var Query =
+                        "INSERT INTO Contrato (Proveedor_id, Grano_id, tipoContrato, cantidad, cerrado, fechaLabra, fechaLimite, numero, precio) " +
+                        $"VALUES ('{idProveedor}','{idGrano}','{tipoContrato}'," +
+                        $"'{cantidad}','{0}','{fechaLabra.ToString("yyyy - MM - dd HH: mm: ss.fff")}'," +
+                        $"'{fechaLimite.ToString("yyyy - MM - dd HH: mm: ss.fff")}','{numero}','{precio}');";
                     MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                     Cmd.ExecuteNonQuery();
                     CloseConnection();
@@ -76,20 +69,10 @@ namespace Contratos.Persistencia
             Contrato ret = null;
             if (GetID(numero) != -1 && OpenConnection()) /// Chequea que exista el Contrato en la DB, si existe logicamente existen sus tablas asociadas (si no se modifico la DB externamente)
             {
-                var Query = string.Format("SELECT " +
-                    "Der.cantidad, " +
-                    "Der.cerrado, " +
-                    "Der.fechaLabra, " +
-                    "Der.fechaLimite, " +
-                    "Der.numero, " +
-                    "Der.precio, " +
-                    "Der.tipoContrato, " +
-                    "Per.cuitCuil, " +
-                    "Gra.tipo " +
-                    "FROM (SELECT * FROM Contrato WHERE numero = {0}) AS Der " +
-                    "INNER JOIN Proveedor Pro ON Der.Proveedor_id = Pro.id " +
+                var Query = $"SELECT * FROM Contrato Con WHERE numero = {numero} " +
+                    "INNER JOIN Proveedor Pro ON Con.Proveedor_id = Pro.id " +
                     "INNER JOIN Persona Per ON Per.id = Pro.Persona_id " +
-                    "INNER JOIN Grano Gra ON Der.Grano_id = Gra.id;", numero);
+                    "INNER JOIN Grano Gra ON Der.Grano_id = Gra.id;";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -127,7 +110,7 @@ namespace Contratos.Persistencia
                 PersistenciaContratoDetalle dbDetalles = new PersistenciaContratoDetalle();
                 if (dbDetalles.Delete(numero) && OpenConnection())
                 {
-                    var Query = string.Format("DELETE FROM Contrato WHERE numero='{0}';", numero);
+                    var Query = $"DELETE FROM Contrato WHERE numero='{numero}';";
                     MySqlCommand cmd = new MySqlCommand(Query, Connection);
                     cmd.ExecuteNonQuery();
                     CloseConnection();
@@ -153,13 +136,13 @@ namespace Contratos.Persistencia
 
             if (idContrato != -1 && OpenConnection())
             {
-                var Query = string.Format("UPDATE Contrato SET " +
-                    "cantidad = '{0}', " +
-                    "fechaLimite = '{1}', " +
-                    "precio = '{2}', " +
-                    "tipoContrato = '{3}', " +
-                    "Grano_id = '{4}' " +
-                    "WHERE id = {5};", cantidad, fechaLimite.ToString("yyyy-MM-dd HH:mm:ss.fff"), precio, tipoContrato, idGrano, idContrato);
+                var Query = "UPDATE Contrato SET " +
+                    $"cantidad = '{cantidad}', " +
+                    $"fechaLimite = '{fechaLimite.ToString("yyyy-MM-dd HH:mm:ss.fff")}', " +
+                    $"precio = '{precio}', " +
+                    $"tipoContrato = '{tipoContrato}', " +
+                    $"Grano_id = '{idGrano}' " +
+                    $"WHERE id = {idContrato};";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -206,7 +189,7 @@ namespace Contratos.Persistencia
 
             if (idContrato != -1 && OpenConnection())
             {
-                var Query = string.Format("UPDATE Contrato SET cerrado = 1 WHERE id = {0};", idContrato);
+                var Query = $"UPDATE Contrato SET cerrado = 1 WHERE id = {idContrato};";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 cmd.ExecuteNonQuery();
                 CloseConnection();

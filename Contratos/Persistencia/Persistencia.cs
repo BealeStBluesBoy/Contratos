@@ -12,7 +12,7 @@ namespace Contratos.Persistencia
         public Persistencia()
         {
             string ConnectionString;
-            ConnectionString = "server = localhost; uid = external; pwd = 123abc; database = molino; sslmode = none";
+            ConnectionString = "server = localhost; uid = root; pwd = 1234; database = molino; sslmode = none";
             Connection = new MySqlConnection(ConnectionString);
         }
 
@@ -58,7 +58,7 @@ namespace Contratos.Persistencia
             int ret = -1;
             if (OpenConnection())
             {
-                var Query = string.Format("SELECT id FROM {0} WHERE {1} = '{2}';", Table, SeekId, uniqueValue);
+                var Query = $"SELECT id FROM {Table} WHERE {SeekId} = '{uniqueValue}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 if (cmd.ExecuteScalar() != null)
                 {

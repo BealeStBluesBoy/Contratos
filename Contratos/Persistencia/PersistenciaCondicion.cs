@@ -16,7 +16,7 @@ namespace Contratos.Persistencia
         {
             if (GetID(nombre) == -1 && OpenConnection()) /// Si existe la Condicion no tiene sentido insertarla
             {
-                var Query = string.Format("INSERT INTO {0} (nombre, unidad) VALUES ('{1}','{2}');", Table, nombre, unidad);
+                var Query = $"INSERT INTO {Table} (nombre, unidad) VALUES ('{nombre}','{unidad}');";
                 MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                 Cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -34,7 +34,7 @@ namespace Contratos.Persistencia
             Condicion ret = null;
             if (GetID(nombre) != -1 && OpenConnection()) /// Chequea que exista la Condicion en la DB
             {
-                var Query = string.Format("SELECT * FROM {0} WHERE {1} = '{2}';", Table, SeekId, nombre);
+                var Query = $"SELECT * FROM {Table} WHERE {SeekId} = '{nombre}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -55,7 +55,7 @@ namespace Contratos.Persistencia
             List<Condicion> ret = new List<Condicion>();
             if (OpenConnection())
             {
-                var Query = string.Format("SELECT * FROM {0};", Table);
+                var Query = $"SELECT * FROM {Table};";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())

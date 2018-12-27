@@ -16,7 +16,7 @@ namespace Contratos.Persistencia
         {
             if (GetID(tipoGrano) == -1 && OpenConnection()) /// Si existe el Grano no tiene sentido insertarlo
             {
-                var Query = string.Format("INSERT INTO Grano (tipo) VALUES ('{0}');", tipoGrano);
+                var Query = $"INSERT INTO Grano (tipo) VALUES ('{tipoGrano}');";
                 MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                 Cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -33,7 +33,7 @@ namespace Contratos.Persistencia
             Grano ret = null;
             if (OpenConnection())
             {
-                var Query = string.Format("SELECT * FROM Grano WHERE tipo = '{0}';", tipo);
+                var Query = $"SELECT * FROM Grano WHERE tipo = '{tipo}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())

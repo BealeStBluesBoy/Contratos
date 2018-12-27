@@ -20,7 +20,8 @@ namespace Contratos.Persistencia
 
             if (idCondicion != -1 && idContrato != -1 && OpenConnection()) /// Hay que verificar que no existe y además de que los id sean diferentes
             {
-                var Query = string.Format("INSERT INTO ContratoDetalle (contrato_id, condicion_id, valor) VALUES ('{0}','{1}','{2}');", idContrato, idCondicion, valor);
+                var Query = "INSERT INTO ContratoDetalle (contrato_id, condicion_id, valor) " +
+                    $"VALUES ('{idContrato}','{idCondicion}','{valor}');";
                 MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                 Cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -39,7 +40,7 @@ namespace Contratos.Persistencia
 
             if (idContrato != -1 && OpenConnection())
             {
-                var Query = string.Format("DELETE FROM ContratoDetalle WHERE Contrato_id='{0}';", idContrato);
+                var Query = $"DELETE FROM ContratoDetalle WHERE Contrato_id = '{idContrato}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 cmd.ExecuteNonQuery();
                 CloseConnection();
@@ -60,14 +61,10 @@ namespace Contratos.Persistencia
 
             if (OpenConnection())
             {
-                var Query = string.Format("SELECT " +
-                    "Det.id AS idDet, " +
-                    "Con.id AS idCon, " +
-                    "Det.valor, " +
-                    "Con.nombre, " +
-                    "Con.unidad " +
-                    "FROM ContratoDetalle Det, Condicion Con " +
-                    "WHERE Contrato_id='{0}' AND Det.Condicion_id = Con.id;", idContrato);
+                var Query = "SELECT valor, nombre, unidad " +
+                    "FROM ContratoDetalle Det " +
+                    "INNER JOIN Condicion Con ON Det.Condicion_id = Con.id " +
+                    $"WHERE Contrato_id = '{idContrato}';";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
