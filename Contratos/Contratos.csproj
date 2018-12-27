@@ -42,12 +42,11 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.10-rc\lib\net452\MySql.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -78,7 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Ventana\AltaContratoDetalle.xaml.cs">
+    <Compile Include="GUI\AltaContratoDetalle.xaml.cs">
       <DependentUpon>AltaContratoDetalle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlador\ControladorGrano.cs" />
@@ -86,53 +85,53 @@
     <Compile Include="Controlador\ControladorCondicion.cs" />
     <Compile Include="Controlador\ControladorProveedor.cs" />
     <Compile Include="Dominio\Proveedor.cs" />
-    <Compile Include="Ventana\GenerarContrato.xaml.cs">
+    <Compile Include="GUI\GenerarContrato.xaml.cs">
       <DependentUpon>GenerarContrato.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ventana\VerEditarContrato.xaml.cs">
+    <Compile Include="GUI\VerEditarContrato.xaml.cs">
       <DependentUpon>VerEditarContrato.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ventana\VerProveedores.xaml.cs">
+    <Compile Include="GUI\VerProveedores.xaml.cs">
       <DependentUpon>VerProveedores.xaml</DependentUpon>
     </Compile>
-    <Page Include="Ventana\AltaCondicion.xaml">
+    <Page Include="GUI\AltaCondicion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\AltaContrato.xaml">
+    <Page Include="GUI\AltaContrato.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\AltaContratoDetalle.xaml">
+    <Page Include="GUI\AltaContratoDetalle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\AltaGrano.xaml">
+    <Page Include="GUI\AltaGrano.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\AltaProveedor.xaml">
+    <Page Include="GUI\AltaProveedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\GenerarContrato.xaml">
+    <Page Include="GUI\GenerarContrato.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\MainWindow.xaml">
+    <Page Include="GUI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Ventana\AltaCondicion.xaml.cs">
+    <Compile Include="GUI\AltaCondicion.xaml.cs">
       <DependentUpon>AltaCondicion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ventana\AltaContrato.xaml.cs">
+    <Compile Include="GUI\AltaContrato.xaml.cs">
       <DependentUpon>AltaContrato.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ventana\AltaGrano.xaml.cs">
+    <Compile Include="GUI\AltaGrano.xaml.cs">
       <DependentUpon>AltaGrano.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ventana\AltaProveedor.xaml.cs">
+    <Compile Include="GUI\AltaProveedor.xaml.cs">
       <DependentUpon>AltaProveedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -143,15 +142,15 @@
     <Compile Include="Dominio\Contrato.cs" />
     <Compile Include="Dominio\ContratoDetalle.cs" />
     <Compile Include="Dominio\Grano.cs" />
-    <Compile Include="Ventana\MainWindow.xaml.cs">
+    <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Ventana\VerEditarContrato.xaml">
+    <Page Include="GUI\VerEditarContrato.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ventana\VerProveedores.xaml">
+    <Page Include="GUI\VerProveedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,39 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Flour.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlTransaction.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlParameterCollection.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlParameter.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlHelper.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlException.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlDataReader.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlDataAdapter.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlConnectionStringBuilder.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlConnection.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlCommandBuilder.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="docs\MySqlCommand.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

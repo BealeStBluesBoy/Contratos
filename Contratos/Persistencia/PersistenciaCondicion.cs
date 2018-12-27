@@ -1,8 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Contratos.Dominio;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Windows;
 
-namespace Contratos
+namespace Contratos.Persistencia
 {
     public class PersistenciaCondicion : Persistencia
     {

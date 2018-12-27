@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Windows;
 
-namespace Contratos
+namespace Contratos.Persistencia
 {
     public abstract class Persistencia
     {

@@ -1,4 +1,4 @@
-﻿namespace Contratos
+﻿namespace Contratos.Dominio
 {
     public abstract class Persona
     {

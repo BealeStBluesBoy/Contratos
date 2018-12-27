@@ -1,8 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Contratos.Dominio;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Contratos
+namespace Contratos.Persistencia
 {
     public class PersistenciaProveedor : PersistenciaPersona
     {

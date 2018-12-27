@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Contratos.Dominio;
+using Contratos.Persistencia;
+using System;
 using System.Collections.Generic;
 
-namespace Contratos
+namespace Contratos.Controlador
 {
     public static class ControladorContrato
     {

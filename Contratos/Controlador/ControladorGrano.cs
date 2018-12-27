@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Contratos.Dominio;
+using Contratos.Persistencia;
+using System.Collections.Generic;
 
-namespace Contratos
+namespace Contratos.Controlador
 {
     public static class ControladorGrano
     {

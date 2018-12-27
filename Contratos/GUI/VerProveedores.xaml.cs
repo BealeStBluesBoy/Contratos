@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Contratos.Controlador;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Contratos
+namespace Contratos.GUI
 {
     /// <summary>
     /// Lógica de interacción para VerProveedores.xaml

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Contratos.Controlador;
+using Contratos.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Contratos
+namespace Contratos.GUI
 {
     /// <summary>
     /// Lógica de interacción para GenerarContrato.xaml

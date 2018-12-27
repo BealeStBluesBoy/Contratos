@@ -2,8 +2,9 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
+using Contratos.Controlador;
 
-namespace Contratos
+namespace Contratos.GUI
 {
     /// <summary>
     /// Lógica de interacción para AltaContratoDetalle.xaml

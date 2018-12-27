@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Contratos.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Ventana\MainWindow.xaml">
+             StartupUri="GUI\MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="23"/>

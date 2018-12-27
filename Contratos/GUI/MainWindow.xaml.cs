@@ -6,21 +6,22 @@ using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Contratos.Dominio;
+using Contratos.Controlador;
 
-namespace Contratos
+namespace Contratos.GUI
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Contrato> Items { get; protected set; }
+        public ObservableCollection<Contrato> Items { get; protected set; } = new ObservableCollection<Contrato>();
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            Items = new ObservableCollection<Contrato>();
             ControladorContrato.ContratoCreado += ControladorContrato_ContratoCreado;
             ControladorContrato.ContratoEliminado += ControladorContrato_ContratoEliminado;
             ControladorContrato.ContratoActualizado += ControladorContrato_ContratoActualizado;

@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using Contratos.Controlador;
+using System.Windows;
 
-namespace Contratos
+namespace Contratos.GUI
 {
     /// <summary>
     /// Lógica de interacción para AltaGrano.xaml
