@@ -71,7 +71,7 @@ namespace Contratos.GUI
             AltaContratoDetalle altaDetalleVentana = new AltaContratoDetalle()
             { Owner = this };
             altaDetalleVentana.ShowDialog();
-            if (altaDetalleVentana.Nombre != "" && altaDetalleVentana.Unidad != "" && altaDetalleVentana.Valor != 0)
+            if (altaDetalleVentana.Nombre != "" && altaDetalleVentana.Unidad != "" && !float.IsNaN(altaDetalleVentana.Valor))
             {
                 var item = new ContratoDetalle(altaDetalleVentana.Valor)
                 {
