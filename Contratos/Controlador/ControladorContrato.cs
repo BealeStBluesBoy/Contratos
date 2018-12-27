@@ -37,7 +37,10 @@ namespace Contratos.Controlador
         public static bool CerrarContrato(int numero)
         {
             PersistenciaContrato dbContrato = new PersistenciaContrato();
-            return dbContrato.Close(numero);
+            bool ret = dbContrato.Close(numero);
+            if (ret)
+                ContratoActualizado?.Invoke(null, VerContrato(numero));
+            return ret;
         }
 
         public static List<Contrato> VerTodos()
