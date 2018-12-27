@@ -46,8 +46,8 @@ namespace Contratos.Persistencia
                     var Query =
                         "INSERT INTO Contrato (Proveedor_id, Grano_id, tipoContrato, cantidad, cerrado, fechaLabra, fechaLimite, numero, precio) " +
                         $"VALUES ('{idProveedor}','{idGrano}','{tipoContrato}'," +
-                        $"'{cantidad}','{0}','{fechaLabra.ToString("yyyy - MM - dd HH: mm: ss.fff")}'," +
-                        $"'{fechaLimite.ToString("yyyy - MM - dd HH: mm: ss.fff")}','{numero}','{precio}');";
+                        $"'{cantidad}','{0}','{fechaLabra.ToString("yyyy-MM-dd HH:mm:ss.fff")}'," +
+                        $"'{fechaLimite.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{numero}','{precio}');";
                     MySqlCommand Cmd = new MySqlCommand(Query, Connection);
                     Cmd.ExecuteNonQuery();
                     CloseConnection();
@@ -69,10 +69,11 @@ namespace Contratos.Persistencia
             Contrato ret = null;
             if (GetID(numero) != -1 && OpenConnection()) /// Chequea que exista el Contrato en la DB, si existe logicamente existen sus tablas asociadas (si no se modifico la DB externamente)
             {
-                var Query = $"SELECT * FROM Contrato Con WHERE numero = {numero} " +
+                var Query = $"SELECT * FROM Contrato Con " +
                     "INNER JOIN Proveedor Pro ON Con.Proveedor_id = Pro.id " +
                     "INNER JOIN Persona Per ON Per.id = Pro.Persona_id " +
-                    "INNER JOIN Grano Gra ON Der.Grano_id = Gra.id;";
+                    "INNER JOIN Grano Gra ON Con.Grano_id = Gra.id " +
+                    $"WHERE numero = {numero} ;";
                 MySqlCommand cmd = new MySqlCommand(Query, Connection);
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -110,7 +111,7 @@ namespace Contratos.Persistencia
                 PersistenciaContratoDetalle dbDetalles = new PersistenciaContratoDetalle();
                 if (dbDetalles.Delete(numero) && OpenConnection())
                 {
-                    var Query = $"DELETE FROM Contrato WHERE numero='{numero}';";
+                    var Query = $"DELETE FROM Contrato WHERE numero = '{numero}';";
                     MySqlCommand cmd = new MySqlCommand(Query, Connection);
                     cmd.ExecuteNonQuery();
                     CloseConnection();
